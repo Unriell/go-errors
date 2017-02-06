@@ -1,8 +1,6 @@
 package errors
 
-import (
-	"stash.bq.com/kiton2/tongari.git/dto"
-)
+import "stash.bq.com/pdtdev/go-errors.git/dto"
 
 var values = map[string]dto.ErrorDto{
 	"BQ0000000": dto.ErrorDto{

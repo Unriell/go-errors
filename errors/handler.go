@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/getsentry/raven-go"
-	"stash.bq.com/kiton2/tongari.git/dto"
+	"stash.bq.com/pdtdev/go-errors.git/dto"
 )
 
 // ErrorHandler defines an instance for rendering errors
