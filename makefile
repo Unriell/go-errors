@@ -4,7 +4,8 @@ VERSION=0.0.1
 
 test:
 	go get github.com/stretchr/testify
-	go test -v -tags=unit -coverprofile $(SRC_PATH)/errors/cover.out /stash.bq.com/pdtdev/go-errors.git/errors
+	cd errors && go get ./...
+	go test -v -tags=unit -coverprofile $(SRC_PATH)/errors/cover.out stash.bq.com/pdtdev/go-errors.git/errors
 	go tool cover -html=$(SRC_PATH)/errors/cover.out -o $(SRC_PATH)/errors/cover.html
 
 clean:
