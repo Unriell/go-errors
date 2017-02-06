@@ -17,7 +17,7 @@ clean:
 all: test
 
 docker_test:
-	docker run -t --rm -v $(SRC_PATH):/go/src/stash.bq.com/pdtdev/go-errors.git golang:1.7 make -f /go/src/stash.bq.com/pdtdev/go-errors.git/makefile test
+	docker run -t --rm -v $(SRC_PATH):/go/src/stash.bq.com/pdtdev/go-errors.git/ golang:1.7 make -f /go/src/stash.bq.com/pdtdev/go-errors.git/makefile test
 
 version:
 	@echo $(VERSION)-v$$(basename $(JOB_NAME))$(BUILD_NUMBER)	
