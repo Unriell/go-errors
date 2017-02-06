@@ -4,7 +4,7 @@ VERSION=0.0.1
 
 test:
 	go get github.com/stretchr/testify
-	go test -v -tags=unit -coverprofile $(SRC_PATH)/errors/cover.out stash.bq.com/kiton2/tongari.git/errors
+	go test -v -tags=unit -coverprofile $(SRC_PATH)/errors/cover.out /stash.bq.com/pdtdev/go-errors.git/errors
 	go tool cover -html=$(SRC_PATH)/errors/cover.out -o $(SRC_PATH)/errors/cover.html
 
 clean:
@@ -17,7 +17,8 @@ clean:
 all: test build
 
 build:
-	go build -o $(SRC_PATH)/dist/errors stash.bq.com/pdtdev/go-errors.git/errors
+	docker run -t --rm -v $(SRC_PATH):/go/src/stash.bq.com/pdtdev/go-errors.git golang:1.7 make -f /go/src/stash.bq.com/pdtdev/go-errors.git/makefile
+	go build -o $(SRC_PATH)/dist/errors /stash.bq.com/pdtdev/go-errors.git/errors
 
 
 version:
