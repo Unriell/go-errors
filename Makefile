@@ -14,12 +14,10 @@ clean:
 	 $(SRC_PATH)/*/cover.out\
 	 $(SRC_PATH)/*/cover.html
 
-all: test build
+all: test
 
-build:
-	docker run -t --rm -v $(SRC_PATH):/go/src/stash.bq.com/pdtdev/go-errors.git golang:1.7 make -f /go/src/stash.bq.com/pdtdev/go-errors.git/makefile
-	go build -o $(SRC_PATH)/dist/errors /stash.bq.com/pdtdev/go-errors.git/errors
-
+docker_test:
+	docker run -t --rm -v $(SRC_PATH):/go/src/stash.bq.com/pdtdev/go-errors.git golang:1.7 make -f /go/src/stash.bq.com/pdtdev/go-errors.git/makefile test
 
 version:
 	@echo $(VERSION)-v$$(basename $(JOB_NAME))$(BUILD_NUMBER)	
