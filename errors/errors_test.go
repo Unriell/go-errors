@@ -16,7 +16,7 @@ func (suite *ErrorTestSuite) TestResourceNotFoundError() {
 	var result = suite.resourceNotFoundError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrResourceNotFound+"|"+suite.resourceNotFoundError.Message+"|"+suite.resourceNotFoundError.RequestID, result)
+	assert.Equal(suite.T(), ErrResourceNotFound+"|"+suite.resourceNotFoundError.message+"|"+suite.resourceNotFoundError.requestID, result)
 }
 
 func (suite *ErrorTestSuite) TestUndefinedError() {
@@ -25,7 +25,7 @@ func (suite *ErrorTestSuite) TestUndefinedError() {
 	var result = suite.undefinedError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrUndefined+"|"+suite.undefinedError.Err.Error(), result)
+	assert.Equal(suite.T(), ErrUndefined+"|"+suite.undefinedError.err.Error(), result)
 }
 
 func (suite *ErrorTestSuite) TestBindError() {
@@ -34,7 +34,7 @@ func (suite *ErrorTestSuite) TestBindError() {
 	var result = suite.bindError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrBind+"|"+suite.bindError.Err.Error()+". "+suite.bindError.Message+"|"+suite.bindError.RequestID, result)
+	assert.Equal(suite.T(), ErrBind+"|"+suite.bindError.err.Error()+". "+suite.bindError.message+"|"+suite.bindError.requestID, result)
 }
 
 func (suite *ErrorTestSuite) TestLdapServerFatalError() {
@@ -43,7 +43,7 @@ func (suite *ErrorTestSuite) TestLdapServerFatalError() {
 	var result = suite.ldapServerFatalError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrLDAPServerFatal+"|"+suite.ldapServerFatalError.Err.Error()+". "+suite.ldapServerFatalError.Message+"|"+suite.ldapServerFatalError.RequestID, result)
+	assert.Equal(suite.T(), ErrLDAPServerFatal+"|"+suite.ldapServerFatalError.err.Error()+". "+suite.ldapServerFatalError.message+"|"+suite.ldapServerFatalError.requestID, result)
 }
 
 func (suite *ErrorTestSuite) TestAuthenticationError() {
@@ -52,7 +52,7 @@ func (suite *ErrorTestSuite) TestAuthenticationError() {
 	var result = suite.authenticationError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrAuthentication+"|"+suite.authenticationError.Err.Error()+". "+suite.authenticationError.Message+"|"+suite.authenticationError.RequestID, result)
+	assert.Equal(suite.T(), ErrAuthentication+"|"+suite.authenticationError.err.Error()+". "+suite.authenticationError.message+"|"+suite.authenticationError.requestID, result)
 }
 
 func (suite *ErrorTestSuite) TestPrivateKeyError() {
@@ -61,7 +61,7 @@ func (suite *ErrorTestSuite) TestPrivateKeyError() {
 	var result = suite.privateKeyError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrPrivateKey+"|"+suite.privateKeyError.Err.Error()+". "+suite.privateKeyError.Message+"|"+suite.privateKeyError.RequestID, result)
+	assert.Equal(suite.T(), ErrPrivateKey+"|"+suite.privateKeyError.err.Error()+". "+suite.privateKeyError.message+"|"+suite.privateKeyError.requestID, result)
 }
 
 func (suite *ErrorTestSuite) TestPublicKeyError() {
@@ -70,7 +70,7 @@ func (suite *ErrorTestSuite) TestPublicKeyError() {
 	var result = suite.publicKeyError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrPublicKey+"|"+suite.publicKeyError.Err.Error()+". "+suite.publicKeyError.Message+"|"+suite.publicKeyError.RequestID, result)
+	assert.Equal(suite.T(), ErrPublicKey+"|"+suite.publicKeyError.err.Error()+". "+suite.publicKeyError.message+"|"+suite.publicKeyError.requestID, result)
 }
 
 func (suite *ErrorTestSuite) TestSignError() {
@@ -79,7 +79,7 @@ func (suite *ErrorTestSuite) TestSignError() {
 	var result = suite.signError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrSign+"|"+suite.signError.Err.Error()+". "+suite.signError.Message+"|"+suite.signError.RequestID, result)
+	assert.Equal(suite.T(), ErrSign+"|"+suite.signError.err.Error()+". "+suite.signError.message+"|"+suite.signError.requestID, result)
 }
 
 func (suite *ErrorTestSuite) TestContentTypeError() {
@@ -88,7 +88,7 @@ func (suite *ErrorTestSuite) TestContentTypeError() {
 	var result = suite.contentTypeError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrUnexpectedContentType+"|"+suite.contentTypeError.Err.Error()+"|"+suite.contentTypeError.RequestID, result)
+	assert.Equal(suite.T(), ErrUnexpectedContentType+"|"+suite.contentTypeError.err.Error()+"|"+suite.contentTypeError.requestID, result)
 }
 
 func (suite *ErrorTestSuite) TestMysqlFatalError() {
@@ -97,7 +97,7 @@ func (suite *ErrorTestSuite) TestMysqlFatalError() {
 	var result = suite.mysqlFatalError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrMySQLFatal+"|"+suite.mysqlFatalError.Err.Error()+"|"+suite.mysqlFatalError.RequestID, result)
+	assert.Equal(suite.T(), ErrMySQLFatal+"|"+suite.mysqlFatalError.err.Error()+"|"+suite.mysqlFatalError.requestID, result)
 }
 
 func (suite *ErrorTestSuite) TestUnssuportedAlgorithmError() {
@@ -106,7 +106,7 @@ func (suite *ErrorTestSuite) TestUnssuportedAlgorithmError() {
 	var result = suite.unssuportedAlgorithmError.Error()
 
 	// assert
-	assert.Equal(suite.T(), ErrUnsupportedAuthAlgorithm+"|"+suite.unssuportedAlgorithmError.Err.Error()+"|"+suite.unssuportedAlgorithmError.RequestID, result)
+	assert.Equal(suite.T(), ErrUnsupportedAuthAlgorithm+"|"+suite.unssuportedAlgorithmError.err.Error()+"|"+suite.unssuportedAlgorithmError.requestID, result)
 }
 
 type ErrorTestSuite struct {
@@ -114,7 +114,7 @@ type ErrorTestSuite struct {
 	resourceNotFoundError     *ResourceNotFoundError
 	undefinedError            *UndefinedError
 	bindError                 *BindError
-	ldapServerFatalError      *LDAPServerFatalError
+	ldapServerFatalError      *LdapServerFatalError
 	authenticationError       *AuthenticationError
 	privateKeyError           *PrivateKeyError
 	publicKeyError            *PublicKeyError
@@ -125,17 +125,17 @@ type ErrorTestSuite struct {
 }
 
 func (suite *ErrorTestSuite) SetupTest() {
-	suite.resourceNotFoundError = &ResourceNotFoundError{Err: errors.New("db is down"), Message: "datastore is down", RequestID: "MockID"}
+	suite.resourceNotFoundError = &ResourceNotFoundError{err: errors.New("db is down"), message: "datastore is down", requestID: "MockID"}
 	suite.undefinedError = &UndefinedError{errors.New("undefined")}
-	suite.bindError = &BindError{Err: errors.New("bind error"), Message: "my custom bind msg", RequestID: "MockID"}
-	suite.ldapServerFatalError = &LDAPServerFatalError{Err: errors.New("ldap server error"), Message: "ldap is down", RequestID: "MockID"}
-	suite.authenticationError = &AuthenticationError{Err: errors.New("authentication error"), Message: "custom msg", RequestID: "MockID"}
-	suite.privateKeyError = &PrivateKeyError{Err: errors.New("private key error"), Message: "custom msg", RequestID: "MockID"}
-	suite.publicKeyError = &PublicKeyError{Err: errors.New("public key error"), Message: "custom msg", RequestID: "MockID"}
-	suite.signError = &SignError{Err: errors.New("sign error"), Message: "custom msg", RequestID: "MockID"}
-	suite.contentTypeError = &ContentTypeError{Err: errors.New("wrong content type"), RequestID: "MockID"}
-	suite.mysqlFatalError = &MySQLFatalError{Err: errors.New("fatal mysql error"), RequestID: "MockID"}
-	suite.unssuportedAlgorithmError = &UnsupportedAlgorithmError{Err: errors.New("unsupported algorithm"), RequestID: "MockID"}
+	suite.bindError = &BindError{err: errors.New("bind error"), message: "my custom bind msg", requestID: "MockID"}
+	suite.ldapServerFatalError = &LdapServerFatalError{err: errors.New("ldap server error"), message: "ldap is down", requestID: "MockID"}
+	suite.authenticationError = &AuthenticationError{err: errors.New("authentication error"), message: "custom msg", requestID: "MockID"}
+	suite.privateKeyError = &PrivateKeyError{err: errors.New("private key error"), message: "custom msg", requestID: "MockID"}
+	suite.publicKeyError = &PublicKeyError{err: errors.New("public key error"), message: "custom msg", requestID: "MockID"}
+	suite.signError = &SignError{err: errors.New("sign error"), message: "custom msg", requestID: "MockID"}
+	suite.contentTypeError = &ContentTypeError{err: errors.New("wrong content type"), requestID: "MockID"}
+	suite.mysqlFatalError = &MySQLFatalError{err: errors.New("fatal mysql error"), requestID: "MockID"}
+	suite.unssuportedAlgorithmError = &UnsupportedAlgorithmError{err: errors.New("unsupported algorithm"), requestID: "MockID"}
 }
 
 func TestErrorTestSuite(t *testing.T) {
