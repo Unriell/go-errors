@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"go.bq.com/pdtdev/go-errors.git/dto"
+	"go.bq.com/pdtdev/go-errors/dto"
 
 	"github.com/getsentry/raven-go"
 )
