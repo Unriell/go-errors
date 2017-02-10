@@ -5,20 +5,18 @@ import (
 	"strings"
 	"sync"
 
-	"go.bq.com/pdtdev/go-errors/dto"
-
 	"github.com/getsentry/raven-go"
 )
 
 // ErrorHandler defines an instance for rendering errors
 type ErrorHandler struct {
-	Values       map[string]dto.ErrorDto
+	Values       map[string]ErrorDto
 	defaultError string
 }
 
 // ErrorHandlerBehavior wraps all errors for easier message access
 type ErrorHandlerBehavior interface {
-	Error(e error, extraTags map[string]string) dto.ErrorDto
+	Error(e error, extraTags map[string]string) ErrorDto
 }
 
 var once sync.Once
@@ -43,7 +41,7 @@ func NewErrorHandler(enviroment, sentryDSN, version string) *ErrorHandler {
 	return ErrorHandlerInstance
 }
 
-func (eh *ErrorHandler) Error(err error, extraTags map[string]string) dto.ErrorDto {
+func (eh *ErrorHandler) Error(err error, extraTags map[string]string) ErrorDto {
 	rawErrorMsg := err.Error()
 	errorDto := eh.Values[eh.defaultError]
 

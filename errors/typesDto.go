@@ -1,4 +1,4 @@
-package dto
+package errors
 
 // ErrorDto defines an extended error
 type ErrorDto struct {
