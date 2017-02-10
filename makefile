@@ -16,7 +16,7 @@ clean:
 all: sync test
 
 docker_test:
-	docker run -t --rm -v $(SRC_PATH):/go/src/go.bq.com/pdtdev/go-errors/ golang:1.7 make -f /go/src/go.bq.com/pdtdev/go-errors/makefile all 
+	docker run -t --rm --dns 172.16.0.250 -v $(SRC_PATH):/go/src/go.bq.com/pdtdev/go-errors/ golang:1.7 make -f /go/src/go.bq.com/pdtdev/go-errors/makefile all 
 
 version:
 	@echo $(VERSION)-v$$(basename $(JOB_NAME))$(BUILD_NUMBER)	
