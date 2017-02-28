@@ -13,6 +13,7 @@ const (
 	ErrUnexpectedContentType    = "BQ0000009"
 	ErrMySQLFatal               = "BQ0000010"
 	ErrUnsupportedAuthAlgorithm = "BQ0000011"
+	ErrResourceConflict         = "BQ0000012"
 )
 
 // CustomError wraps any error message
@@ -180,4 +181,18 @@ func NewUnsupportedAlgorithmError(err error, requestId string) *UnsupportedAlgor
 
 func (unsuportedAlgorithmError *UnsupportedAlgorithmError) Error() string {
 	return ErrUnsupportedAuthAlgorithm + "|" + unsuportedAlgorithmError.err.Error() + "|" + unsuportedAlgorithmError.requestID
+}
+
+// UnsupportedAlgorithmError wraps unknown algorithm requests
+type ResourceConflictError struct {
+	err       error
+	requestID string
+}
+
+func NewResourceConflictError(err error, requestId string) *ResourceConflictError {
+	return &ResourceConflictError{err, requestId}
+}
+
+func (resourceConflictError *ResourceConflictError) Error() string {
+	return ErrResourceConflict + "|" + resourceConflictError.err.Error() + "|" + resourceConflictError.requestID
 }

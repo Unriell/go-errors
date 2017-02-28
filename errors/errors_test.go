@@ -109,6 +109,15 @@ func (suite *ErrorTestSuite) TestUnssuportedAlgorithmError() {
 	assert.Equal(suite.T(), ErrUnsupportedAuthAlgorithm+"|"+suite.unssuportedAlgorithmError.err.Error()+"|"+suite.unssuportedAlgorithmError.requestID, result)
 }
 
+func (suite *ErrorTestSuite) TestResourceConflictError() {
+
+	// invoke
+	var result = suite.resourceConflictError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrResourceConflict+"|"+suite.resourceConflictError.err.Error()+"|"+suite.resourceConflictError.requestID, result)
+}
+
 type ErrorTestSuite struct {
 	suite.Suite
 	resourceNotFoundError     *ResourceNotFoundError
@@ -122,6 +131,7 @@ type ErrorTestSuite struct {
 	contentTypeError          *ContentTypeError
 	mysqlFatalError           *MySQLFatalError
 	unssuportedAlgorithmError *UnsupportedAlgorithmError
+	resourceConflictError     *ResourceConflictError
 }
 
 func (suite *ErrorTestSuite) SetupTest() {
@@ -136,6 +146,7 @@ func (suite *ErrorTestSuite) SetupTest() {
 	suite.contentTypeError = &ContentTypeError{err: errors.New("wrong content type"), requestID: "MockID"}
 	suite.mysqlFatalError = &MySQLFatalError{err: errors.New("fatal mysql error"), requestID: "MockID"}
 	suite.unssuportedAlgorithmError = &UnsupportedAlgorithmError{err: errors.New("unsupported algorithm"), requestID: "MockID"}
+	suite.resourceConflictError = &ResourceConflictError{err: errors.New("resource conflict error"), requestID: "MockID"}
 }
 
 func TestErrorTestSuite(t *testing.T) {

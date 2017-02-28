@@ -1,7 +1,6 @@
 package errors
 
-
-var values = map[string]ErrorDto {
+var values = map[string]ErrorDto{
 	"BQ0000000": ErrorDto{
 		ID:     "BQ0000000",
 		Status: 500,
@@ -61,5 +60,10 @@ var values = map[string]ErrorDto {
 		ID:     "BQ0000011",
 		Status: 400,
 		Msg:    "unssuported auth algorithm",
+	},
+	"BQ0000012": ErrorDto{
+		ID:     "BQ0000012",
+		Status: 409,
+		Msg:    "Resource conflict",
 	},
 }
