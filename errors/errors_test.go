@@ -118,6 +118,33 @@ func (suite *ErrorTestSuite) TestResourceConflictError() {
 	assert.Equal(suite.T(), ErrResourceConflict+"|"+suite.resourceConflictError.err.Error()+"|"+suite.resourceConflictError.requestID, result)
 }
 
+func (suite *ErrorTestSuite) TestRedisFatalError() {
+
+	// invoke
+	var result = suite.errRedisFatalError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrRedisFatal+"|"+suite.errRedisFatalError.err.Error()+"|"+suite.errRedisFatalError.requestID, result)
+}
+
+func (suite *ErrorTestSuite) TestRedisUnmarshalError() {
+
+	// invoke
+	var result = suite.errRedisUnmarshalError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrRedisUnmarshal+"|"+suite.errRedisUnmarshalError.err.Error()+"|"+suite.errRedisUnmarshalError.requestID, result)
+}
+
+func (suite *ErrorTestSuite) TestRedisNotFoundError() {
+
+	// invoke
+	var result = suite.errRedisNotfoundError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrRedisNotFound+"|"+suite.errRedisNotfoundError.err.Error()+"|"+suite.errRedisNotfoundError.requestID, result)
+}
+
 type ErrorTestSuite struct {
 	suite.Suite
 	resourceNotFoundError     *ResourceNotFoundError
@@ -132,6 +159,9 @@ type ErrorTestSuite struct {
 	mysqlFatalError           *MySQLFatalError
 	unssuportedAlgorithmError *UnsupportedAlgorithmError
 	resourceConflictError     *ResourceConflictError
+	errRedisFatalError        *RedisFatalError
+	errRedisUnmarshalError    *RedisUnmarshalError
+	errRedisNotfoundError     *RedisNotFoundError
 }
 
 func (suite *ErrorTestSuite) SetupTest() {
@@ -147,6 +177,9 @@ func (suite *ErrorTestSuite) SetupTest() {
 	suite.mysqlFatalError = &MySQLFatalError{err: errors.New("fatal mysql error"), requestID: "MockID"}
 	suite.unssuportedAlgorithmError = &UnsupportedAlgorithmError{err: errors.New("unsupported algorithm"), requestID: "MockID"}
 	suite.resourceConflictError = &ResourceConflictError{err: errors.New("resource conflict error"), requestID: "MockID"}
+	suite.errRedisFatalError = &RedisFatalError{err: errors.New("redis fatal error"), requestID: "MockID"}
+	suite.errRedisUnmarshalError = &RedisUnmarshalError{err: errors.New("redis Unmarshal error"), requestID: "MockID"}
+	suite.errRedisNotfoundError = &RedisNotFoundError{err: errors.New("redis notfound error"), requestID: "MockID"}
 }
 
 func TestErrorTestSuite(t *testing.T) {

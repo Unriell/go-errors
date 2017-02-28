@@ -14,6 +14,9 @@ const (
 	ErrMySQLFatal               = "BQ0000010"
 	ErrUnsupportedAuthAlgorithm = "BQ0000011"
 	ErrResourceConflict         = "BQ0000012"
+	ErrRedisFatal               = "BQ0000013"
+	ErrRedisUnmarshal           = "BQ0000014"
+	ErrRedisNotFound            = "BQ0000015"
 )
 
 // CustomError wraps any error message
@@ -195,4 +198,43 @@ func NewResourceConflictError(err error, requestId string) *ResourceConflictErro
 
 func (resourceConflictError *ResourceConflictError) Error() string {
 	return ErrResourceConflict + "|" + resourceConflictError.err.Error() + "|" + resourceConflictError.requestID
+}
+
+type RedisFatalError struct {
+	err       error
+	requestID string
+}
+
+func NewRedisFatalError(err error, requestId string) *RedisFatalError {
+	return &RedisFatalError{err, requestId}
+}
+
+func (redisFatalError *RedisFatalError) Error() string {
+	return ErrRedisFatal + "|" + redisFatalError.err.Error() + "|" + redisFatalError.requestID
+}
+
+type RedisUnmarshalError struct {
+	err       error
+	requestID string
+}
+
+func NewRedisUnmarshalError(err error, requestId string) *RedisUnmarshalError {
+	return &RedisUnmarshalError{err, requestId}
+}
+
+func (redisUnmarshalError *RedisUnmarshalError) Error() string {
+	return ErrRedisUnmarshal + "|" + redisUnmarshalError.err.Error() + "|" + redisUnmarshalError.requestID
+}
+
+type RedisNotFoundError struct {
+	err       error
+	requestID string
+}
+
+func NewRedisNotFoundError(err error, requestId string) *RedisNotFoundError {
+	return &RedisNotFoundError{err, requestId}
+}
+
+func (redisNotFoundError *RedisNotFoundError) Error() string {
+	return ErrRedisNotFound + "|" + redisNotFoundError.err.Error() + "|" + redisNotFoundError.requestID
 }

@@ -66,4 +66,14 @@ var values = map[string]ErrorDto{
 		Status: 409,
 		Msg:    "Resource conflict",
 	},
+	"BQ0000013": ErrorDto{
+		ID:     "BQ0000013",
+		Status: 500,
+		Msg:    "Redis fatal error",
+	},
+	"BQ0000014": ErrorDto{
+		ID:     "BQ0000014",
+		Status: 500,
+		Msg:    "Unmarshal redis error",
+	},
 }
