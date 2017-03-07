@@ -2,21 +2,23 @@ package errors
 
 // Below are predefined keys to errors
 const (
-	ErrBind                     = "BQ0000001"
-	ErrResourceNotFound         = "BQ0000002"
-	ErrUndefined                = "BQ0000003"
-	ErrLDAPServerFatal          = "BQ0000004"
-	ErrAuthentication           = "BQ0000005"
-	ErrPrivateKey               = "BQ0000006"
-	ErrPublicKey                = "BQ0000007"
-	ErrSign                     = "BQ0000008"
-	ErrUnexpectedContentType    = "BQ0000009"
-	ErrMySQLFatal               = "BQ0000010"
-	ErrUnsupportedAuthAlgorithm = "BQ0000011"
-	ErrResourceConflict         = "BQ0000012"
-	ErrRedisFatal               = "BQ0000013"
-	ErrRedisUnmarshal           = "BQ0000014"
-	ErrRedisNotFound            = "BQ0000015"
+	ErrBind                      = "BQ0000001"
+	ErrResourceNotFound          = "BQ0000002"
+	ErrUndefined                 = "BQ0000003"
+	ErrLDAPServerFatal           = "BQ0000004"
+	ErrAuthentication            = "BQ0000005"
+	ErrPrivateKey                = "BQ0000006"
+	ErrPublicKey                 = "BQ0000007"
+	ErrSign                      = "BQ0000008"
+	ErrUnexpectedContentType     = "BQ0000009"
+	ErrMySQLFatal                = "BQ0000010"
+	ErrUnsupportedAuthAlgorithm  = "BQ0000011"
+	ErrResourceConflict          = "BQ0000012"
+	ErrRedisFatal                = "BQ0000013"
+	ErrRedisUnmarshal            = "BQ0000014"
+	ErrRedisNotFound             = "BQ0000015"
+	ErrAuthorization             = "BQ0000016"
+	ErrInvalidAuthorizationToken = "BQ0000017"
 )
 
 // CustomError wraps any error message
@@ -237,4 +239,32 @@ func NewRedisNotFoundError(err error, requestId string) *RedisNotFoundError {
 
 func (redisNotFoundError *RedisNotFoundError) Error() string {
 	return ErrRedisNotFound + "|" + redisNotFoundError.err.Error() + "|" + redisNotFoundError.requestID
+}
+
+type AuthorizationError struct {
+	err       error
+	message   string
+	requestID string
+}
+
+func NewAuthorizationError(err error, message, requestId string) *AuthorizationError {
+	return &AuthorizationError{err, message, requestId}
+}
+
+func (errAuthorization *AuthorizationError) Error() string {
+	return ErrAuthorization + "|" + errAuthorization.err.Error() + ". " + errAuthorization.message + "|" + errAuthorization.requestID
+}
+
+type InvalidAuthorizationTokenError struct {
+	err       error
+	message   string
+	requestID string
+}
+
+func NewInvalidAuthorizationTokenError(err error, message, requestId string) *InvalidAuthorizationTokenError {
+	return &InvalidAuthorizationTokenError{err, message, requestId}
+}
+
+func (errInvalidAuthorizationToken *InvalidAuthorizationTokenError) Error() string {
+	return ErrInvalidAuthorizationToken + "|" + errInvalidAuthorizationToken.err.Error() + ". " + errInvalidAuthorizationToken.message + "|" + errInvalidAuthorizationToken.requestID
 }

@@ -76,4 +76,19 @@ var values = map[string]ErrorDto{
 		Status: 500,
 		Msg:    "Unmarshal redis error",
 	},
+	"BQ0000015": ErrorDto{
+		ID:     "BQ0000015",
+		Status: 404,
+		Msg:    "Redis not found",
+	},
+	"BQ0000016": ErrorDto{
+		ID:     "BQ0000016",
+		Status: 401,
+		Msg:    "authorization error",
+	},
+	"BQ0000017": ErrorDto{
+		ID:     "BQ0000017",
+		Status: 400,
+		Msg:    "invalid authorization_token format",
+	},
 }

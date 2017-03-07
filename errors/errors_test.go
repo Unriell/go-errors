@@ -145,23 +145,43 @@ func (suite *ErrorTestSuite) TestRedisNotFoundError() {
 	assert.Equal(suite.T(), ErrRedisNotFound+"|"+suite.errRedisNotfoundError.err.Error()+"|"+suite.errRedisNotfoundError.requestID, result)
 }
 
+func (suite *ErrorTestSuite) TestAuthorizationError() {
+
+	// invoke
+	var result = suite.errAuthorizationError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrAuthorization+"|"+suite.errAuthorizationError.err.Error()+". "+suite.errAuthorizationError.message+"|"+suite.errAuthorizationError.requestID, result)
+}
+
+func (suite *ErrorTestSuite) TestInvalidAuthorizationTokenError() {
+
+	// invoke
+	var result = suite.errInvalidAuthorizationTokenError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrInvalidAuthorizationToken+"|"+suite.errInvalidAuthorizationTokenError.err.Error()+". "+suite.errInvalidAuthorizationTokenError.message+"|"+suite.errInvalidAuthorizationTokenError.requestID, result)
+}
+
 type ErrorTestSuite struct {
 	suite.Suite
-	resourceNotFoundError     *ResourceNotFoundError
-	undefinedError            *UndefinedError
-	bindError                 *BindError
-	ldapServerFatalError      *LdapServerFatalError
-	authenticationError       *AuthenticationError
-	privateKeyError           *PrivateKeyError
-	publicKeyError            *PublicKeyError
-	signError                 *SignError
-	contentTypeError          *ContentTypeError
-	mysqlFatalError           *MySQLFatalError
-	unssuportedAlgorithmError *UnsupportedAlgorithmError
-	resourceConflictError     *ResourceConflictError
-	errRedisFatalError        *RedisFatalError
-	errRedisUnmarshalError    *RedisUnmarshalError
-	errRedisNotfoundError     *RedisNotFoundError
+	resourceNotFoundError             *ResourceNotFoundError
+	undefinedError                    *UndefinedError
+	bindError                         *BindError
+	ldapServerFatalError              *LdapServerFatalError
+	authenticationError               *AuthenticationError
+	privateKeyError                   *PrivateKeyError
+	publicKeyError                    *PublicKeyError
+	signError                         *SignError
+	contentTypeError                  *ContentTypeError
+	mysqlFatalError                   *MySQLFatalError
+	unssuportedAlgorithmError         *UnsupportedAlgorithmError
+	resourceConflictError             *ResourceConflictError
+	errRedisFatalError                *RedisFatalError
+	errRedisUnmarshalError            *RedisUnmarshalError
+	errRedisNotfoundError             *RedisNotFoundError
+	errAuthorizationError             *AuthorizationError
+	errInvalidAuthorizationTokenError *InvalidAuthorizationTokenError
 }
 
 func (suite *ErrorTestSuite) SetupTest() {
@@ -180,6 +200,8 @@ func (suite *ErrorTestSuite) SetupTest() {
 	suite.errRedisFatalError = &RedisFatalError{err: errors.New("redis fatal error"), requestID: "MockID"}
 	suite.errRedisUnmarshalError = &RedisUnmarshalError{err: errors.New("redis Unmarshal error"), requestID: "MockID"}
 	suite.errRedisNotfoundError = &RedisNotFoundError{err: errors.New("redis notfound error"), requestID: "MockID"}
+	suite.errAuthorizationError = &AuthorizationError{err: errors.New("authorization error"), requestID: "MockID"}
+	suite.errInvalidAuthorizationTokenError = &InvalidAuthorizationTokenError{err: errors.New("invalid authorization token"), requestID: "MockID"}
 }
 
 func TestErrorTestSuite(t *testing.T) {
