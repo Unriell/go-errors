@@ -55,7 +55,9 @@ func (eh *ErrorHandler) Error(err error, extraTags map[string]string) ErrorDto {
 			var id, ok = msg[0], false
 			if errorDto, ok = eh.Values[id]; ok {
 				errorDto.ComponentMsg = msg[1]
-				errorDto.SentryCode = msg[2]
+				if len(msg) > 2 {
+					errorDto.SentryCode = msg[2]
+				}
 			} else {
 				errorDto = eh.Values[eh.defaultError]
 				errorDto.ComponentMsg = "this error doesn't exist. Msg " + rawErrorMsg

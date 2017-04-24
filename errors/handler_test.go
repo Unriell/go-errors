@@ -54,6 +54,25 @@ func (suite *ErrorHandlerTestSuite) TestSuccessError() {
 	assert.Equal(suite.T(), "my error msg", result.ComponentMsg)
 }
 
+func (suite *ErrorHandlerTestSuite) TestErrorWithoutID() {
+
+	dst := make(map[string]string, 3)
+	dst["URL"] = "www.google.com"
+	dst["os"] = "android"
+	dst["tagTest"] = "test tag"
+	dst["extraTag"] = "extra test tag"
+
+	// invoke
+	result := suite.errHandler.Error(errors.New("BQ0000001|my error msg"), dst)
+
+	// assert
+	assert.Equal(suite.T(), "BQ0000001", result.ID)
+	assert.Equal(suite.T(), "Invalid inbound entity", result.Msg)
+	assert.Equal(suite.T(), 400, result.Status)
+	assert.Equal(suite.T(), "", result.SentryCode)
+	assert.Equal(suite.T(), "my error msg", result.ComponentMsg)
+}
+
 type ErrorHandlerTestSuite struct {
 	suite.Suite
 	errHandler *ErrorHandler
