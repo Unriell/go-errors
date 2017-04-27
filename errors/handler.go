@@ -18,6 +18,7 @@ type ErrorHandler struct {
 // ErrorHandlerBehavior wraps all errors for easier message access
 type ErrorHandlerBehavior interface {
 	Error(e error, extraTags map[string]string) ErrorDto
+	ErrorNoSentry(e error) ErrorDto
 }
 
 var once sync.Once
@@ -42,7 +43,7 @@ func NewErrorHandler(enviroment, sentryDSN, version string) *ErrorHandler {
 	return ErrorHandlerInstance
 }
 
-func (eh *ErrorHandler) Error(err error, extraTags map[string]string) ErrorDto {
+func (eh *ErrorHandler) ErrorNoSentry(err error) ErrorDto {
 	rawErrorMsg := err.Error()
 	errorDto := eh.Values[eh.defaultError]
 	logrus.Info("errorHandler: " + rawErrorMsg)
@@ -65,6 +66,13 @@ func (eh *ErrorHandler) Error(err error, extraTags map[string]string) ErrorDto {
 			}
 		}
 	}
+
+	return errorDto
+}
+
+func (eh *ErrorHandler) Error(err error, extraTags map[string]string) ErrorDto {
+
+	errorDto := eh.ErrorNoSentry(err)
 
 	tags := eh.getSentryErrorsTags(extraTags)
 	tags["id"] = errorDto.ID
