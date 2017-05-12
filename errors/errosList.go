@@ -91,4 +91,9 @@ var values = map[string]ErrorDto{
 		Status: 400,
 		Msg:    "invalid authorization_token format",
 	},
+	"BQ0000018": ErrorDto{
+		ID:     "BQ0000018",
+		Status: 401,
+		Msg:    "Token expires",
+	},
 }

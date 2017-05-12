@@ -163,6 +163,15 @@ func (suite *ErrorTestSuite) TestInvalidAuthorizationTokenError() {
 	assert.Equal(suite.T(), ErrInvalidAuthorizationToken+"|"+suite.errInvalidAuthorizationTokenError.err.Error()+". "+suite.errInvalidAuthorizationTokenError.message+"|"+suite.errInvalidAuthorizationTokenError.requestID, result)
 }
 
+func (suite *ErrorTestSuite) TestTokenExpiresError() {
+
+	// invoke
+	var result = suite.errTokenExpiresError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrTokenExpires+"|"+suite.errTokenExpiresError.err.Error()+". "+suite.errTokenExpiresError.message+"|"+suite.errTokenExpiresError.requestID, result)
+}
+
 type ErrorTestSuite struct {
 	suite.Suite
 	resourceNotFoundError             *ResourceNotFoundError
@@ -182,6 +191,7 @@ type ErrorTestSuite struct {
 	errRedisNotfoundError             *RedisNotFoundError
 	errAuthorizationError             *AuthorizationError
 	errInvalidAuthorizationTokenError *InvalidAuthorizationTokenError
+	errTokenExpiresError              *TokenExpiresError
 }
 
 func (suite *ErrorTestSuite) SetupTest() {
@@ -202,6 +212,7 @@ func (suite *ErrorTestSuite) SetupTest() {
 	suite.errRedisNotfoundError = &RedisNotFoundError{err: errors.New("redis notfound error"), requestID: "MockID"}
 	suite.errAuthorizationError = &AuthorizationError{err: errors.New("authorization error"), requestID: "MockID"}
 	suite.errInvalidAuthorizationTokenError = &InvalidAuthorizationTokenError{err: errors.New("invalid authorization token"), requestID: "MockID"}
+	suite.errTokenExpiresError = &TokenExpiresError{err: errors.New("token expires"), requestID: "MockID"}
 }
 
 func TestErrorTestSuite(t *testing.T) {

@@ -19,6 +19,7 @@ const (
 	ErrRedisNotFound             = "BQ0000015"
 	ErrAuthorization             = "BQ0000016"
 	ErrInvalidAuthorizationToken = "BQ0000017"
+	ErrTokenExpires              = "BQ0000018"
 )
 
 // CustomError wraps any error message
@@ -267,4 +268,18 @@ func NewInvalidAuthorizationTokenError(err error, message, requestId string) *In
 
 func (errInvalidAuthorizationToken *InvalidAuthorizationTokenError) Error() string {
 	return ErrInvalidAuthorizationToken + "|" + errInvalidAuthorizationToken.err.Error() + ". " + errInvalidAuthorizationToken.message + "|" + errInvalidAuthorizationToken.requestID
+}
+
+type TokenExpiresError struct {
+	err       error
+	message   string
+	requestID string
+}
+
+func NewTokenExpiresError(err error, message, requestId string) *TokenExpiresError {
+	return &TokenExpiresError{err, message, requestId}
+}
+
+func (errTokenExpiresError *TokenExpiresError) Error() string {
+	return ErrTokenExpires + "|" + errTokenExpiresError.err.Error() + ". " + errTokenExpiresError.message + "|" + errTokenExpiresError.requestID
 }
