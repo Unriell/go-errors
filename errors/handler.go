@@ -70,7 +70,7 @@ func (eh *ErrorHandler) ErrorNoSentry(err error) ErrorDto {
 	return errorDto
 }
 
-func (eh *ErrorHandler) Error(err error, extraTags map[string]string) ErrorDto {
+func (eh *ErrorHandler) Error(err error, extraTags map[string]string, reportToSentry bool) ErrorDto {
 
 	errorDto := eh.ErrorNoSentry(err)
 
@@ -79,7 +79,10 @@ func (eh *ErrorHandler) Error(err error, extraTags map[string]string) ErrorDto {
 	tags["status"] = strconv.Itoa(errorDto.Status)
 	tags["sentryCode"] = errorDto.SentryCode
 
-	go func() { raven.CaptureErrorAndWait(err, tags) }()
+	if reportToSentry {
+		go func() { raven.CaptureErrorAndWait(err, tags) }()
+	}
+
 	return errorDto
 }
 
