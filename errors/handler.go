@@ -11,8 +11,9 @@ import (
 
 // ErrorHandler defines an instance for rendering errors
 type ErrorHandler struct {
-	Values       map[string]ErrorDto
-	defaultError string
+	Values               map[string]ErrorDto
+	defaultError         string
+	enableReportToSentry bool
 }
 
 // ErrorHandlerBehavior wraps all errors for easier message access
@@ -25,7 +26,7 @@ var once sync.Once
 var ErrorHandlerInstance *ErrorHandler
 
 // NewErrorHandler returns a global ErrorHandler instance
-func NewErrorHandler(enviroment, sentryDSN, version string) *ErrorHandler {
+func NewErrorHandler(enviroment, sentryDSN, version string, reportToSentry bool) *ErrorHandler {
 
 	once.Do(func() {
 
@@ -34,8 +35,9 @@ func NewErrorHandler(enviroment, sentryDSN, version string) *ErrorHandler {
 		raven.SetRelease(version)
 
 		ErrorHandlerInstance = &ErrorHandler{
-			Values:       values,
-			defaultError: "BQ0000000",
+			Values:               values,
+			defaultError:         "BQ0000000",
+			enableReportToSentry: reportToSentry,
 		}
 
 	})
@@ -70,7 +72,7 @@ func (eh *ErrorHandler) ErrorNoSentry(err error) ErrorDto {
 	return errorDto
 }
 
-func (eh *ErrorHandler) Error(err error, extraTags map[string]string, reportToSentry bool) ErrorDto {
+func (eh *ErrorHandler) Error(err error, extraTags map[string]string) ErrorDto {
 
 	errorDto := eh.ErrorNoSentry(err)
 
@@ -79,10 +81,9 @@ func (eh *ErrorHandler) Error(err error, extraTags map[string]string, reportToSe
 	tags["status"] = strconv.Itoa(errorDto.Status)
 	tags["sentryCode"] = errorDto.SentryCode
 
-	if reportToSentry {
+	if eh.enableReportToSentry {
 		go func() { raven.CaptureErrorAndWait(err, tags) }()
 	}
-
 	return errorDto
 }
 
