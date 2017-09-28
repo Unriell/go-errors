@@ -172,6 +172,15 @@ func (suite *ErrorTestSuite) TestTokenExpiresError() {
 	assert.Equal(suite.T(), ErrTokenExpires+"|"+suite.errTokenExpiresError.err.Error()+". "+suite.errTokenExpiresError.message+"|"+suite.errTokenExpiresError.requestID, result)
 }
 
+func (suite *ErrorTestSuite) TestNotificationConflictError() {
+
+	// invoke
+	var result = suite.notificationConflictError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrNotificationConflict+"|"+suite.notificationConflictError.err.Error()+"|"+suite.notificationConflictError.requestID, result)
+}
+
 type ErrorTestSuite struct {
 	suite.Suite
 	resourceNotFoundError             *ResourceNotFoundError
@@ -192,6 +201,7 @@ type ErrorTestSuite struct {
 	errAuthorizationError             *AuthorizationError
 	errInvalidAuthorizationTokenError *InvalidAuthorizationTokenError
 	errTokenExpiresError              *TokenExpiresError
+	notificationConflictError         *NotificationConflictError
 }
 
 func (suite *ErrorTestSuite) SetupTest() {
@@ -213,6 +223,7 @@ func (suite *ErrorTestSuite) SetupTest() {
 	suite.errAuthorizationError = &AuthorizationError{err: errors.New("authorization error"), requestID: "MockID"}
 	suite.errInvalidAuthorizationTokenError = &InvalidAuthorizationTokenError{err: errors.New("invalid authorization token"), requestID: "MockID"}
 	suite.errTokenExpiresError = &TokenExpiresError{err: errors.New("token expires"), requestID: "MockID"}
+	suite.notificationConflictError = &NotificationConflictError{err: errors.New("resource conflict error"), requestID: "MockID"}
 }
 
 func TestErrorTestSuite(t *testing.T) {

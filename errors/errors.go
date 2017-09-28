@@ -20,6 +20,7 @@ const (
 	ErrAuthorization             = "BQ0000016"
 	ErrInvalidAuthorizationToken = "BQ0000017"
 	ErrTokenExpires              = "BQ0000018"
+	ErrNotificationConflict      = "BQ0000019"
 )
 
 // CustomError wraps any error message
@@ -282,4 +283,17 @@ func NewTokenExpiresError(err error, message, requestId string) *TokenExpiresErr
 
 func (errTokenExpiresError *TokenExpiresError) Error() string {
 	return ErrTokenExpires + "|" + errTokenExpiresError.err.Error() + ". " + errTokenExpiresError.message + "|" + errTokenExpiresError.requestID
+}
+
+type NotificationConflictError struct {
+	err       error
+	requestID string
+}
+
+func NewNotificationConflictError(err error, requestId string) *NotificationConflictError {
+	return &NotificationConflictError{err, requestId}
+}
+
+func (notificationConflictError *NotificationConflictError) Error() string {
+	return ErrNotificationConflict + "|" + notificationConflictError.err.Error() + "|" + notificationConflictError.requestID
 }

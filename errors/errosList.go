@@ -96,4 +96,9 @@ var values = map[string]ErrorDto{
 		Status: 401,
 		Msg:    "Token expires",
 	},
+	"BQ0000019": ErrorDto{
+		ID:     "BQ0000019",
+		Status: 409,
+		Msg:    "Notification conflict",
+	},
 }
