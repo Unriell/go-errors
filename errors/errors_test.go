@@ -181,6 +181,15 @@ func (suite *ErrorTestSuite) TestNotificationConflictError() {
 	assert.Equal(suite.T(), ErrNotificationConflict+"|"+suite.notificationConflictError.err.Error()+"|"+suite.notificationConflictError.requestID, result)
 }
 
+func (suite *ErrorTestSuite) TestBadRequestError() {
+
+	// invoke
+	var result = suite.badRequestError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrBadRequest+"|"+suite.badRequestError.err.Error()+"|"+suite.badRequestError.requestID, result)
+}
+
 type ErrorTestSuite struct {
 	suite.Suite
 	resourceNotFoundError             *ResourceNotFoundError
@@ -202,6 +211,7 @@ type ErrorTestSuite struct {
 	errInvalidAuthorizationTokenError *InvalidAuthorizationTokenError
 	errTokenExpiresError              *TokenExpiresError
 	notificationConflictError         *NotificationConflictError
+	badRequestError                   *BadRequestError
 }
 
 func (suite *ErrorTestSuite) SetupTest() {
@@ -224,6 +234,7 @@ func (suite *ErrorTestSuite) SetupTest() {
 	suite.errInvalidAuthorizationTokenError = &InvalidAuthorizationTokenError{err: errors.New("invalid authorization token"), requestID: "MockID"}
 	suite.errTokenExpiresError = &TokenExpiresError{err: errors.New("token expires"), requestID: "MockID"}
 	suite.notificationConflictError = &NotificationConflictError{err: errors.New("resource conflict error"), requestID: "MockID"}
+	suite.badRequestError = &BadRequestError{err: errors.New("resource bad request error"), requestID: "MockID"}
 }
 
 func TestErrorTestSuite(t *testing.T) {

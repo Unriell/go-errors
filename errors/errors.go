@@ -21,6 +21,7 @@ const (
 	ErrInvalidAuthorizationToken = "BQ0000017"
 	ErrTokenExpires              = "BQ0000018"
 	ErrNotificationConflict      = "BQ0000019"
+	ErrBadRequest                = "BQ0000020"
 )
 
 // CustomError wraps any error message
@@ -296,4 +297,19 @@ func NewNotificationConflictError(err error, requestId string) *NotificationConf
 
 func (notificationConflictError *NotificationConflictError) Error() string {
 	return ErrNotificationConflict + "|" + notificationConflictError.err.Error() + "|" + notificationConflictError.requestID
+}
+
+// BadRequestError wraps JSON struct bad request errors
+type BadRequestError struct {
+	err       error
+	message   string
+	requestID string
+}
+
+func NewBadRequestError(err error, message, requestId string) *BadRequestError {
+	return &BadRequestError{err, message, requestId}
+}
+
+func (badRequestError *BadRequestError) Error() string {
+	return ErrBadRequest + "|" + badRequestError.err.Error() + badRequestError.message + "|" + badRequestError.requestID
 }

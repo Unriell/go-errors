@@ -101,4 +101,9 @@ var values = map[string]ErrorDto{
 		Status: 409,
 		Msg:    "Notification conflict",
 	},
+	"BQ0000020": ErrorDto{
+		ID:     "BQ0000020",
+		Status: 400,
+		Msg:    "Invalid input parameters",
+	},
 }

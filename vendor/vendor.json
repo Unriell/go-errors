@@ -3,6 +3,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "2avCvSn0XonfApKKuTMyiQmk7s0=",
+			"path": "github.com/Sirupsen/logrus",
+			"revision": "3ec0642a7fb6488f65b06f9040adc67e3990296a",
+			"revisionTime": "2016-08-29T20:23:21Z"
+		},
+		{
 			"checksumSHA1": "D8gUHzS23ynNPS4imXcAqGnfTck=",
 			"path": "github.com/certifi/gocertifi",
 			"revision": "a61bf5eafa3aee233ec8043e9da052447e5463dd",
@@ -45,13 +51,7 @@
 			"path": "github.com/stretchr/testify/suite",
 			"revision": "2402e8e7a02fc811447d11f881aa9746cdc57983",
 			"revisionTime": "2016-12-17T20:04:45Z"
-		},
-		{
-			"checksumSHA1": "2avCvSn0XonfApKKuTMyiQmk7s0=",
-			"path": "github.com/Sirupsen/logrus",
-			"revision": "3ec0642a7fb6488f65b06f9040adc67e3990296a",
-			"revisionTime": "2016-08-29T20:23:21Z"
 		}
 	],
-	"rootPath": "go.bq.com/pdtdev/go-errors"
+	"rootPath": "github.com/bq/go-errors"
 }
