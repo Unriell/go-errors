@@ -11,7 +11,7 @@ make all
 2. Install
 
 ```Terminal
-go get stash.bq.com/pdtdev/go-errors.git
+govendor fetch github.com/bq/go-errors/errors
 ```
 
 3. how to use it
