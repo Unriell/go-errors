@@ -5,7 +5,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/getsentry/raven-go"
 )
 
@@ -48,7 +47,6 @@ func NewErrorHandler(enviroment, sentryDSN, version string, reportToSentry bool)
 func (eh *ErrorHandler) ErrorNoSentry(err error) ErrorDto {
 	rawErrorMsg := err.Error()
 	errorDto := eh.Values[eh.defaultError]
-	logrus.Info("errorHandler: " + rawErrorMsg)
 	if len(rawErrorMsg) == 0 {
 		errorDto.ComponentMsg = "Undefined error code. No error code found"
 	} else {
