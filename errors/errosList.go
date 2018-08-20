@@ -106,4 +106,9 @@ var values = map[string]ErrorDto{
 		Status: 400,
 		Msg:    "Invalid input parameters",
 	},
+	"BQ0000021": ErrorDto{
+		ID:     "BQ0000021",
+		Status: 401,
+		Msg:    "Session expired.",
+	},
 }

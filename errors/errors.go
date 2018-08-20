@@ -22,11 +22,27 @@ const (
 	ErrTokenExpires              = "BQ0000018"
 	ErrNotificationConflict      = "BQ0000019"
 	ErrBadRequest                = "BQ0000020"
+	ErrSessionExpired            = "BQ0000021"
 )
 
 // CustomError wraps any error message
 type CustomError interface {
 	Error() string
+}
+
+// SessionExpiredError wraps 401 errors
+type SessionExpiredError struct {
+	err       error
+	message   string
+	requestID string
+}
+
+func NewSessionExpiredError(err error, message, requestId string) *SessionExpiredError {
+	return &SessionExpiredError{err, message, requestId}
+}
+
+func (sessionExpiredError *SessionExpiredError) Error() string {
+	return ErrSessionExpired + "|" + sessionExpiredError.message + "|" + sessionExpiredError.requestID
 }
 
 // ResourceNotFoundError wraps 404 errors

@@ -190,6 +190,15 @@ func (suite *ErrorTestSuite) TestBadRequestError() {
 	assert.Equal(suite.T(), ErrBadRequest+"|"+suite.badRequestError.err.Error()+"|"+suite.badRequestError.requestID, result)
 }
 
+func (suite *ErrorTestSuite) TestSessionExpiredError() {
+
+	// invoke
+	var result = suite.sessionExpiredError.Error()
+
+	// assert
+	assert.Equal(suite.T(), ErrSessionExpired+"|"+suite.sessionExpiredError.err.Error()+"|"+suite.sessionExpiredError.requestID, result)
+}
+
 type ErrorTestSuite struct {
 	suite.Suite
 	resourceNotFoundError             *ResourceNotFoundError
@@ -212,6 +221,7 @@ type ErrorTestSuite struct {
 	errTokenExpiresError              *TokenExpiresError
 	notificationConflictError         *NotificationConflictError
 	badRequestError                   *BadRequestError
+	sessionExpiredError               *SessionExpiredError
 }
 
 func (suite *ErrorTestSuite) SetupTest() {
@@ -235,6 +245,7 @@ func (suite *ErrorTestSuite) SetupTest() {
 	suite.errTokenExpiresError = &TokenExpiresError{err: errors.New("token expires"), requestID: "MockID"}
 	suite.notificationConflictError = &NotificationConflictError{err: errors.New("resource conflict error"), requestID: "MockID"}
 	suite.badRequestError = &BadRequestError{err: errors.New("resource bad request error"), requestID: "MockID"}
+	suite.sessionExpiredError = &SessionExpiredError{err: errors.New("Session expired"), message: "Session expired", requestID: "MockID"}
 }
 
 func TestErrorTestSuite(t *testing.T) {
